@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Cooking Daddy</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link th:href="@{assets/img/favicon.png}" rel="icon">
+  <link th:href="@{assets/img/apple-touch-icon.png}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link th:href="@{https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i}" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link th:href="@{assets/vendor/animate.css/animate.min.css}" rel="stylesheet">
+  <link th:href="@{assets/vendor/aos/aos.css}" rel="stylesheet}">
+  <link th:href="@{assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <link th:href="@{assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+  <link th:href="@{assets/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
+  <link th:href="@{assets/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
+  <link th:href="@{assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link th:href="@{assets/css/style.css}" rel="stylesheet">
+  
+  <!-- =======================================================
+  * Template Name: Restaurantly - v3.8.0
+  * Template URL: https://bootstrapmade.com/restaurantly-restaurant-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+<!--Top Bar portion-->
+<body>
+    <div id="topbar" class="d-flex align-items-center fixed-top">
+        <div class="container d-flex justify-content-center justify-content-md-between">
+    
+          <div class="contact-info d-flex align-items-center">
+            <i class="bi bi-phone d-flex align-items-center"><span>+65 8268 2022</span></i>
+            <i class="bi bi-clock d-flex align-items-center ms-4"><span> Al day all night cooking daddy</span></i>
+          </div>
+    
+        </div>
+      </div>
+<!--Top bar end-->
+
+<!--Search Results-->
+
+        <section class="menu section-bg">
+            
+        <div class="section-title">
+        
+        <div class="container">
+        <div class="section-title">
+            <h1>Here are your recipes</h1>
+            <h2>Search results</h2>
+            <p>Check Out These Recipes!</p>
+        </div>
+        <!-- <span th:text="${user.getUsername()}"></span> -->
+            <div th:each = "recipe:${recipeList}">  
+
+            <form 
+            action="#"
+            th:action="@{/recipes/instructions/(id=${recipe.id})}" 
+            th:object="${recipe}"
+            method="get"
+            >
+                    <div class="col-lg-6 menu-item filter-starters">
+                      <img th:src="@{${recipe.getImageUrl()}}" class="menu-img" alt="">
+                      <div class="menu-content">
+                        <a href="#"></a><span th:text ="${recipe.getTitle()}"></span>
+                        <input type="hidden" name="recipeTitle" th:value="${recipe.title}">
+                        <input type="hidden" name="id" th:value="${recipe.id}">
+                      </div>
+                      <div class="menu-ingredients">
+                        You will Need:
+                        <br>
+                        Available Ingredients: 
+                        <br>
+                        <div th:each = "usedIngredients:${recipe.getUsedIngredientsList()}">
+                            <!-- <p> Used Ingredient ID: <span th:text="${usedIngredients.getId()}"></span>
+                            <p> Used Ingredient Amount: <span th:text="${usedIngredients.getAmount()}"></span>  
+                            <p> Used Ingredient Unit: <span th:text="${usedIngredients.getUnit()}"></span> 
+                            <p> Used Ingredient Aisle: <span th:text="${usedIngredients.getAisle()}"></span>  -->
+                            <tr><span th:text="${usedIngredients.getAmount()}"></span> <span th:text="${usedIngredients.getUnit()}"></span> <span th:text="${usedIngredients.getName()}"></span> </tr>
+                            <!-- <p><img th:src="@{${usedIngredients.getImageUrl()}}" width="200" height="200 "></p> -->
+                        </div>
+                        <br>
+                        Missing Ingredients
+                        <div th:each = "missedIngredients:${recipe.getMissedIngredientsList()}">
+                            <!-- <p> Missed Ingredient ID: <span th:text="${missedIngredients.getId()}"></span> -->
+                            <tr><span th:text="${missedIngredients.getAmount()}" > </span> <span th:text="${missedIngredients.getUnit()}" > <span th:text="${missedIngredients.getName()}" ></span></span> <span th:text="${missedIngredients.getName()}" ></span></p>
+                            <!-- <p> Missed Ingredient Amount: <span th:text="${missedIngredients.getAmount()}"></span>   -->
+                            <!-- <p> Missed Ingredient Unit: <span th:text="${missedIngredients.getUnit()}"></span> 
+                            <p> Missed Ingredient Aisle: <span th:text="${missedIngredients.getAisle()}"></span> 
+                            <p> Missed Ingredient Name: <span th:text="${missedIngredients.getName()}"></span>  -->
+                            <!-- <p><img th:src="@{${missedIngredients.getImageUrl()}}" width="200" height="200 "></p> -->
+                        </div>
+                        <br>
+                        <button type="submit">View this recipe</button>    
+                        </div>
+                        </div>
+            </form>
+        </div>
+    </body>
+</html>
